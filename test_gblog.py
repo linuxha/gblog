@@ -70,6 +70,20 @@ class TestGblogConstants(unittest.TestCase):
         self.assertEqual(gblog.DEFAULT_TOKEN_FILE, 'token.json')
 
 
+class TestGblogBlogIdFunction(unittest.TestCase):
+    """Test get_blog_id function signature and parameters"""
+    
+    def test_get_blog_id_signature(self):
+        """Test that get_blog_id accepts blog_id parameter"""
+        import inspect
+        sig = inspect.signature(gblog.get_blog_id)
+        params = list(sig.parameters.keys())
+        
+        self.assertIn('service', params)
+        self.assertIn('blog_id', params)
+        self.assertIn('blog_url', params)
+
+
 class TestGblogPostConstruction(unittest.TestCase):
     """Test post body construction"""
     

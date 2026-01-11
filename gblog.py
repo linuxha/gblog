@@ -81,19 +81,32 @@ def get_credentials(credentials_file=DEFAULT_CREDENTIALS_FILE,
     return creds
 
 
-def get_blog_id(service, blog_url=None):
+def get_blog_id(service, blog_id=None, blog_url=None):
     """
-    Get the blog ID from a blog URL or list available blogs.
+    Get the blog ID from direct ID, blog URL, or list available blogs.
     
     Args:
         service: Authorized Blogger API service instance
+        blog_id: Optional blog ID to use directly
         blog_url: Optional blog URL to get ID for
         
     Returns:
         Blog ID string
     """
     try:
-        if blog_url:
+        if blog_id:
+            # Validate the provided blog ID by attempting to get blog info
+            try:
+                blog = service.blogs().get(blogId=blog_id).execute()
+                print(f"Using blog: {blog['name']} ({blog['url']})")
+                return blog_id
+            except HttpError as error:
+                if error.resp.status == 404:
+                    print(f"Error: Blog ID '{blog_id}' not found or not accessible.")
+                else:
+                    print(f"Error validating blog ID '{blog_id}': {error}")
+                sys.exit(1)
+        elif blog_url:
             # Get blog by URL
             blog = service.blogs().getByUrl(url=blog_url).execute()
             return blog['id']
@@ -113,7 +126,7 @@ def get_blog_id(service, blog_url=None):
             else:
                 print("\nAvailable blogs:")
                 for i, blog in enumerate(blogs, 1):
-                    print(f"{i}. {blog['name']} - {blog['url']}")
+                    print(f"{i}. {blog['name']} - {blog['url']} (ID: {blog['id']})")
                 
                 while True:
                     try:
@@ -215,6 +228,9 @@ Examples:
   
   # Specify blog URL and credentials file
   %(prog)s -f post.txt -t "My Post" -b https://myblog.blogspot.com -c my_creds.json
+  
+  # Specify blog ID directly (most efficient)
+  %(prog)s -f post.txt -t "My Post" --blog-id 1234567890123456789
         """
     )
     
@@ -224,6 +240,8 @@ Examples:
                         help='Post title')
     parser.add_argument('-b', '--blog-url',
                         help='Blog URL (e.g., https://myblog.blogspot.com)')
+    parser.add_argument('--blog-id',
+                        help='Blog ID (direct specification, takes precedence over --blog-url)')
     parser.add_argument('-l', '--labels',
                         help='Comma-separated list of labels/tags')
     parser.add_argument('--draft', action='store_true',
@@ -252,7 +270,7 @@ Examples:
     service = build('blogger', 'v3', credentials=creds)
     
     print("Getting blog information...")
-    blog_id = get_blog_id(service, args.blog_url)
+    blog_id = get_blog_id(service, args.blog_id, args.blog_url)
     
     print(f"Reading content from '{args.file}'...")
     content = read_file_content(args.file)

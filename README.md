@@ -92,6 +92,18 @@ If you have multiple blogs, specify which one to use:
 python gblog.py -f mypost.txt -t "My Post" -b https://myblog.blogspot.com
 ```
 
+### Specify Blog ID Directly
+
+For more efficient posting, use the blog ID directly (most efficient method):
+
+```bash
+python gblog.py -f mypost.txt -t "My Post" --blog-id 1234567890123456789
+```
+
+**Note:** The `--blog-id` option takes precedence over `--blog-url` if both are specified.
+
+**Finding your Blog ID:** You can find your blog ID by running the script once without specifying `--blog-id` or `--blog-url`, and it will list all your blogs with their IDs. You can also find it in your blog's Blogger dashboard URL: `https://www.blogger.com/blogger.g?blogID=YOUR_BLOG_ID_HERE`
+
 ### Custom Credentials File
 
 ```bash
@@ -104,6 +116,7 @@ python gblog.py -f mypost.txt -t "My Post" -c /path/to/credentials.json
 -f, --file FILE         Text/HTML file to post (required)
 -t, --title TITLE       Post title (required)
 -b, --blog-url URL      Blog URL (e.g., https://myblog.blogspot.com)
+--blog-id ID           Blog ID (direct specification, takes precedence over --blog-url)
 -l, --labels LABELS     Comma-separated list of labels/tags
 --draft                 Create as draft instead of publishing
 -c, --credentials FILE  Path to credentials.json file (default: credentials.json)
