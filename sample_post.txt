@@ -1,0 +1,19 @@
+This is a sample blog post with HTML content.
+
+<h2>Introduction</h2>
+<p>This is a paragraph with <strong>bold text</strong> and <em>italic text</em>.</p>
+
+<h2>Features</h2>
+<ul>
+  <li>Support for HTML tags</li>
+  <li>Easy to use command-line interface</li>
+  <li>OAuth 2.0 authentication</li>
+</ul>
+
+<h2>Code Example</h2>
+<pre><code>
+def hello_world():
+    print("Hello, World!")
+</code></pre>
+
+<p>Thank you for reading!</p>
