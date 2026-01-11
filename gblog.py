@@ -9,7 +9,6 @@ to a Google Blogger blog using OAuth 2.0 authentication.
 import argparse
 import os
 import sys
-from pathlib import Path
 
 try:
     from google.oauth2.credentials import Credentials
@@ -53,7 +52,9 @@ def get_credentials(credentials_file=DEFAULT_CREDENTIALS_FILE,
         if creds and creds.expired and creds.refresh_token:
             try:
                 creds.refresh(Request())
-            except Exception as e:
+            except (Exception) as e:
+                # Handle credential refresh errors - common causes include
+                # revoked tokens, expired refresh tokens, or network issues
                 print(f"Error refreshing credentials: {e}")
                 print("Requesting new authorization...")
                 creds = None
@@ -141,7 +142,16 @@ def read_file_content(file_path):
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             return f.read()
-    except Exception as e:
+    except FileNotFoundError:
+        print(f"Error: File '{file_path}' not found.")
+        sys.exit(1)
+    except PermissionError:
+        print(f"Error: Permission denied reading file '{file_path}'.")
+        sys.exit(1)
+    except UnicodeDecodeError:
+        print(f"Error: Unable to decode file '{file_path}'. Please ensure it's a valid UTF-8 text file.")
+        sys.exit(1)
+    except OSError as e:
         print(f"Error reading file '{file_path}': {e}")
         sys.exit(1)
 
