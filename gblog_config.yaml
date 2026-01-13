@@ -1,0 +1,25 @@
+# gblog Configuration File
+# This file contains default settings for gblog
+
+# Blog Configuration
+# Use either blog_url OR blog_id (blog_id takes precedence if both are specified)
+blog_url: https://myblog.blogspot.com
+# blog_id: 1234567890123456789
+
+# Authentication Files
+credentials: credentials.json
+token: token.json
+
+# Default Labels
+# Can be specified as a list (recommended) or comma-separated string
+labels:
+  - blogging
+  - tech
+  - programming
+# Alternative string format:
+# labels: "blogging,tech,programming"
+
+# Default Settings
+draft: false  # Set to true to create drafts by default
+
+# Note: Command line arguments always take precedence over config file settings
