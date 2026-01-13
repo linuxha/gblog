@@ -1,0 +1,24 @@
+<!-- title>Panic in the Dev Disco: When Your Code Won't Compile<title -->
+<!-- labels>programming, debugging, software development, humor<labels -->
+
+<h1>The Great Debugging Adventure</h1>
+
+<p>It was a dark and stormy night when the compiler started throwing errors. Every developer knows that feeling - when you've been coding for hours, everything was working fine, and suddenly...</p>
+
+<p><strong>BOOM!</strong> 💥</p>
+
+<p>Your code refuses to compile. The errors are cryptic. The stack trace looks like ancient hieroglyphics. And you start questioning every life choice that led you to this moment.</p>
+
+<h2>The Five Stages of Debugging</h2>
+
+<ol>
+    <li><strong>Denial</strong>: "It was working five minutes ago!"</li>
+    <li><strong>Anger</strong>: "This compiler is clearly broken!"</li>
+    <li><strong>Bargaining</strong>: "Maybe if I just restart VS Code..."</li>
+    <li><strong>Depression</strong>: "I'll never figure this out."</li>
+    <li><strong>Acceptance</strong>: "Let me actually read the error message."</li>
+</ol>
+
+<p>Remember fellow developers: every bug is just a puzzle waiting to be solved. And coffee helps. ☕</p>
+
+<p><em>Happy debugging!</em></p>

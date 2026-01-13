@@ -1,0 +1,7 @@
+<!-- labels>test, no title<labels -->
+
+<h1>This file has no title metadata</h1>
+
+<p>This post only has labels but no title defined in metadata.</p>
+
+<p>This should trigger an error when no title is provided via command line.</p>
